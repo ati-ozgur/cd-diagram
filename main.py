@@ -318,6 +318,7 @@ def wilcoxon_holm(alpha=0.05, df_perf=None):
     friedman_p_value = friedmanchisquare(*(
         np.array(df_perf.loc[df_perf['classifier_name'] == c]['accuracy'])
         for c in classifiers))[1]
+    #print("friedman_p_value",friedman_p_value)
     if friedman_p_value >= alpha:
         # then the null hypothesis over the entire classifiers cannot be rejected
         print('the null hypothesis over the entire classifiers cannot be rejected')
@@ -380,4 +381,4 @@ def wilcoxon_holm(alpha=0.05, df_perf=None):
 
 df_perf = pd.read_csv('example.csv',index_col=False)
 
-draw_cd_diagram(df_perf=df_perf, title='Accuracy', labels=True)
+draw_cd_diagram(df_perf=df_perf, alpha=0.1, title='Accuracy', labels=True)
